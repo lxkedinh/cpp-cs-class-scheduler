@@ -18,5 +18,13 @@ class MainActivity : AppCompatActivity() {
         val json = inputStream.bufferedReader().use { it.readText() }
         val classes = gson.fromJson(json, Array<CsClass>::class.java).toList()
 
+        val repository = CsClassRepository.get()
+
+        repository.addClasses(classes)
+
+        val cs1400 = repository.getSections(1400)
+        Log.d(TAG, cs1400[0].instructor)
+        Log.d(TAG, cs1400[1].instructor)
+
     }
 }
