@@ -3,7 +3,6 @@ package com.cpp.cppcsclassscheduler
 import android.content.Context
 import androidx.room.Room
 import com.cpp.cppcsclassscheduler.database.CsClassDatabase
-import java.util.concurrent.Executors
 
 private const val DATABASE_NAME = "cpp-cs-classes"
 
@@ -15,21 +14,10 @@ class CsClassRepository private constructor(context: Context) {
         DATABASE_NAME
     ).build()
     private val csClassDao = database.CsClassDao()
-    private val executor = Executors.newSingleThreadExecutor()
 
     fun getAllClasses(): List<CsClass> = csClassDao.getAllClasses()
 
-    fun getSections(id: Int): List<CsClass>  {
-        executor.execute {
-            csClassDao.getAllSections(id)
-        }
-    }
-
-    fun addClasses(classes: List<CsClass>) {
-        executor.execute {
-            csClassDao.addClasses(classes)
-        }
-    }
+    fun getSections(id: Int): List<CsClass> = csClassDao.getAllSections(id)
 
     companion object {
         private var INSTANCE: CsClassRepository? = null

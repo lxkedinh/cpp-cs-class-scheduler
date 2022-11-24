@@ -15,5 +15,4 @@ interface CsClassDao {
 
     @Insert
     fun addClasses(classes: List<CsClass>)
-
 }
