@@ -19,6 +19,8 @@ class CsClassRepository private constructor(context: Context) {
 
     fun getSections(id: Int): List<CsClass> = csClassDao.getAllSections(id)
 
+    fun searchClasses(query: String?): List<CsClass> = csClassDao.searchClasses(query)
+
     companion object {
         private var INSTANCE: CsClassRepository? = null
         fun initialize(context: Context) {
