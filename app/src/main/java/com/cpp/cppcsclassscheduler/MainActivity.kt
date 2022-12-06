@@ -27,11 +27,11 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         // Build a GoogleSignInClient with the options specified by gso.
-        val mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
         val account = GoogleSignIn.getLastSignedInAccount(this)
         if(account != null){
-            val intent = Intent(this, ClassListView::class.java)
+            val intent = Intent(this, CourseSearchActivity::class.java)
             startActivity(intent)
         }
 
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         val skipButton = findViewById<Button>(R.id.button2)
         skipButton.setOnClickListener {
-            val intent = Intent(this, ClassListView::class.java)
+            val intent = Intent(this, CourseSearchActivity::class.java)
             startActivity(intent)
         }
     }
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
             val account = completedTask.getResult(ApiException::class.java)
 
             // Signed in successfully, show authenticated UI.
-            val intent = Intent(this, ClassListView::class.java)
+            val intent = Intent(this, CourseSearchActivity::class.java)
             startActivity(intent)
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.

@@ -4,15 +4,23 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.cpp.cppcsclassscheduler.CsClass
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CsClassDao {
-    @Query("SELECT * FROM csclass")
-    fun getAllClasses(): List<CsClass>
+    @Query("SELECT * FROM CsClass")
+    suspend fun getAllClasses(): List<CsClass>
 
-    @Query("SELECT * FROM csclass WHERE id = :id")
-    fun getAllSections(id: Int): List<CsClass>
+    @Query("SELECT * FROM CsClass WHERE id = :id")
+    fun getAllSections(id: Int): Flow<List<CsClass>>
+
+//    @Query("""
+//        SELECT *
+//        FROM csClasses_fts
+//        WHERE csClasses_fts MATCH :query
+//    """)
+//    fun searchClasses(query: String?): List<CsClass>
 
     @Insert
-    fun addClasses(classes: List<CsClass>)
+    suspend fun addClasses(classes: List<CsClass>)
 }

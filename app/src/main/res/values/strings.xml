@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">CPP CS Class Scheduler</string>
+    <string name="search_hint">Search for CS Classes</string>
+    <string name="class_search_hint">Search For Classes</string>
+    <string name="search_button_text">Search</string>
 </resources>
