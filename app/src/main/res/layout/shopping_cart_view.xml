@@ -3,15 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/blue">
 
     <TextView
         android:id="@+id/shopping_cart_text"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
+        android:id="@+id/textView3"
+        android:layout_width="339dp"
         android:layout_marginStart="200dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="200dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:textColor="@color/white"
         android:layout_marginBottom="25dp"
         android:text="@string/shopping_cart_text"
         android:textSize="24sp"
@@ -38,5 +43,8 @@
         android:background="@drawable/round_button"
         android:text="@string/add_to_calendar_button_text"
         app:layout_constraintEnd_toStartOf="@+id/shopping_cart_recyclerview"
+        android:text="Add"
+        android:textColor="@color/purple_700"
+        app:layout_constraintEnd_toStartOf="@+id/scrollView4"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
