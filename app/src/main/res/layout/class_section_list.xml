@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/blue">
 
     <TextView
         android:id="@+id/textView2"
@@ -12,7 +13,10 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="33dp"
         android:layout_marginEnd="50dp"
+        android:fontFamily="@font/open_sans_bold"
         android:text="TEMP STR: SET TO CS CLASS NAME"
+        android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,6 +52,7 @@
         android:background="@drawable/round_button"
         android:text="Cart"
         android:textAlignment="center"
+        android:textColor="@color/purple_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.452"
         app:layout_constraintStart_toStartOf="parent"
