@@ -4,14 +4,18 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 private const val TAG = "CourseSearchActivity"
 const val EXTRA_COURSE_ID = "com.cpp.cppcsclassscheduler.EXTRA_COURSE_ID"
@@ -19,23 +23,25 @@ const val EXTRA_COURSE_NAME = "com.cpp.cppcssclassscheduler.EXTRA_COURSE_NAME"
 
 class CourseSearchActivity : AppCompatActivity() {
 
-    private val viewmodel: CourseSearchViewModel by lazy {
-        ViewModelProvider(this)[CourseSearchViewModel::class.java]
-    }
-    private var adapter: CourseAdapter? = CourseAdapter(emptyList())
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.course_search_results)
 
-        // observe cs class live data and update search results
-        val recyclerView = findViewById<RecyclerView>(R.id.search_results_recyclerview)
-        val courseNameObserver = Observer<List<Pair<String,Int>>> { newCourses ->
-            adapter = CourseAdapter(newCourses)
-            recyclerView.layoutManager = LinearLayoutManager(this)
-            recyclerView.adapter = adapter
+        val viewmodel: CourseSearchViewModel by lazy {
+            ViewModelProvider(this)[CourseSearchViewModel::class.java]
         }
-        viewmodel.courseNames.observe(this, courseNameObserver)
+
+        // fetch all CPP cs classes on different thread in coroutine
+        viewmodel.viewModelScope.launch(Dispatchers.IO) {
+            val courseNames = viewmodel.getAllCourseNames()
+
+            // populate recyclerview on main UI thread
+            withContext(Dispatchers.Main) {
+                val recyclerView: RecyclerView = findViewById(R.id.search_results_recyclerview)
+                recyclerView.adapter = CourseAdapter(courseNames)
+                recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
+            }
+        }
 
         // TODO: verify the action and get search query
         if (Intent.ACTION_SEARCH == intent.action) {

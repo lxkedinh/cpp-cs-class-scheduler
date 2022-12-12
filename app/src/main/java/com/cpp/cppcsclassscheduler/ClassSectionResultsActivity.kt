@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,10 +18,6 @@ private const val TAG = "ClassSectionResultsActivity"
 
 class ClassSectionResultsActivity : AppCompatActivity() {
 
-    private val viewmodel: ClassSectionResultsViewModel by lazy {
-        ViewModelProvider(this)[ClassSectionResultsViewModel::class.java]
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.class_section_list)
@@ -30,6 +27,10 @@ class ClassSectionResultsActivity : AppCompatActivity() {
         val screenHeading = findViewById<TextView>(R.id.course_name)
         screenHeading.text = courseName
 
+        val viewmodel: ClassSectionResultsViewModel by lazy {
+            ViewModelProvider(this)[ClassSectionResultsViewModel::class.java]
+        }
+
         viewmodel.viewModelScope.launch(Dispatchers.IO) {
 
             // fetch course sections on a separate IO thread
@@ -38,9 +39,8 @@ class ClassSectionResultsActivity : AppCompatActivity() {
             // populate recycler view with fetched sections back on main thread
             withContext(Dispatchers.Main) {
                 val recyclerView: RecyclerView = findViewById(R.id.course_sections_recyclerview)
-                val adapter = CourseSectionAdapter(sections)
+                recyclerView.adapter = CourseSectionAdapter(sections)
                 recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
-                recyclerView.adapter = adapter
             }
         }
     }

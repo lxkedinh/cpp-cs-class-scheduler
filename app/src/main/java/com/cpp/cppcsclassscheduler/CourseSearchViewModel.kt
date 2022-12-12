@@ -5,11 +5,8 @@ import androidx.lifecycle.*
 class CourseSearchViewModel : ViewModel() {
 
     private val repository = CsClassRepository.get()
-    val courseNames: LiveData<List<Pair<String,Int>>> = liveData {
-        emit(getAllCourses())
-    }
 
-    suspend fun getAllCourses(): List<Pair<String,Int>> {
+    suspend fun getAllCourseNames(): List<Pair<String,Int>> {
         // create set to prevent duplicates of class names
         val classNameSet = mutableSetOf<Pair<String, Int>>()
         val classes = repository.getAllClasses()

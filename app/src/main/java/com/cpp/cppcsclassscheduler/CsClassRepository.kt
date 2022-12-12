@@ -45,4 +45,14 @@ class CsClassRepository private constructor(context: Context) {
             throw IllegalStateException("Cs Class Repository must be initialized")
         }
     }
+
+//    init {
+//        GlobalScope.launch {
+//            val gson = Gson()
+//            val jsonString = context.assets.open("data.json").bufferedReader().use { it.readText() }
+//            val classes = gson.fromJson(jsonString, Array<CsClass>::class.java).toList()
+//            addClasses(classes)
+//            database.close()
+//        }
+//    }
 }
