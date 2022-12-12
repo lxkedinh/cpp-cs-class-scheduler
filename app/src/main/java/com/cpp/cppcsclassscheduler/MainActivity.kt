@@ -35,17 +35,17 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val signInButton = findViewById<Button>(R.id.button)
+        val signInButton = findViewById<Button>(R.id.login_button)
         signInButton.setOnClickListener {
-            val signInIntent: Intent = mGoogleSignInClient.getSignInIntent()
+            val signInIntent: Intent = mGoogleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
-        val skipButton = findViewById<Button>(R.id.button2)
-        skipButton.setOnClickListener {
-            val intent = Intent(this, CourseSearchActivity::class.java)
-            startActivity(intent)
-        }
+//        val skipButton = findViewById<Button>(R.id.button2)
+//        skipButton.setOnClickListener {
+//            val intent = Intent(this, CourseSearchActivity::class.java)
+//            startActivity(intent)
+//        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

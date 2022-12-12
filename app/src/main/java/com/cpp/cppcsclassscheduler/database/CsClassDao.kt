@@ -8,11 +8,11 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CsClassDao {
-    @Query("SELECT * FROM CsClass")
+    @Query("SELECT * FROM csClasses")
     suspend fun getAllClasses(): List<CsClass>
 
-    @Query("SELECT * FROM CsClass WHERE id = :id")
-    fun getAllSections(id: Int): Flow<List<CsClass>>
+    @Query("SELECT * FROM csClasses WHERE courseId = :id")
+    suspend fun getAllSections(id: Int): List<CsClass>
 
 //    @Query("""
 //        SELECT *

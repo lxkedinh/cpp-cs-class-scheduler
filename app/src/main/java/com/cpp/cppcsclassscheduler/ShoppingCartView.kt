@@ -11,4 +11,8 @@ class ShoppingCartView : AppCompatActivity() {
         setContentView(R.layout.shopping_cart_view)
     }
 
+//  add classes button on click listener
+
+//  google calendar client
+
 }

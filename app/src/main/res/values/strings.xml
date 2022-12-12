@@ -3,4 +3,9 @@
     <string name="search_hint">Search for CS Classes</string>
     <string name="class_search_hint">Search For Classes</string>
     <string name="search_button_text">Search</string>
+    <string name="login_button_text">Login to Google</string>
+    <string name="course_section_number">Section: %1$d</string>
+    <string name="course_instructor">Instructor: %1$s</string>
+    <string name="course_room">Location: Building %1$s Room %2$s</string>
+    <string name="course_days">Meeting Dates: %1$s %2$s - %3$s</string>
 </resources>
