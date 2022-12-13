@@ -2,8 +2,8 @@ package com.cpp.cppcsclassscheduler
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
@@ -34,14 +34,13 @@ class ClassSectionResultsActivity : AppCompatActivity() {
         screenHeading.text = courseName
 
         viewmodel.viewModelScope.launch(Dispatchers.IO) {
-
             // fetch course sections on a separate IO thread
-            val sections = viewmodel.csClassRepository.getAllSections(courseId)
+            val sections = viewmodel.getAllSections(courseId)
 
             // populate recycler view with fetched sections back on main thread
             withContext(Dispatchers.Main) {
                 val recyclerView: RecyclerView = findViewById(R.id.course_sections_recyclerview)
-                recyclerView.adapter = CourseSectionAdapter(sections, R.layout.course_section_selection_list_item)
+                recyclerView.adapter = SectionCheckboxItemAdapter(sections)
                 recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
             }
         }
@@ -52,27 +51,44 @@ class ClassSectionResultsActivity : AppCompatActivity() {
         }
     }
 
-    private inner class sectionSelectionItemHolder(view: View): CourseSectionHolder(view) {
+    private inner class SectionCheckboxItemAdapter(val sections: List<CsClass>) :
+        RecyclerView.Adapter<SectionCheckboxItemHolder>() {
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SectionCheckboxItemHolder {
+            val view = layoutInflater.inflate(R.layout.course_section_selection_list_item, parent, false)
+            return SectionCheckboxItemHolder(view)
+        }
+
+        override fun getItemCount() = sections.size
+
+        override fun onBindViewHolder(holder: SectionCheckboxItemHolder, position: Int) {
+            holder.bind(sections[position])
+        }
+    }
+
+    private inner class SectionCheckboxItemHolder(view: View): CourseSectionHolder(view) {
 
         val checkBox: CheckBox = itemView.findViewById(R.id.check_box)
 
         override fun bind(section: CsClass) {
             super.bind(section)
 
+            viewmodel.viewModelScope.launch {
+                val isClassInCart = withContext(Dispatchers.IO) {
+                    viewmodel.queryClassInCart(section.courseId, section.section)
+                }
+
+                checkBox.isChecked = isClassInCart
+            }
+
             checkBox.setOnClickListener { view ->
                 if (view is CheckBox) {
                     if (view.isChecked) {
-                        // add class to shopping cart
-                        viewmodel.viewModelScope.launch(Dispatchers.IO) {
-                            Log.d(TAG, "added class to cart")
-                            viewmodel.cartRepository.addClassToCart(section)
-                        }
+                        // add class to shopping cart if checkbox becomes checked
+                        viewmodel.addClassToCart(section)
                     } else {
-                        // remove class from shopping cart
-                        viewmodel.viewModelScope.launch(Dispatchers.IO) {
-                            Log.d(TAG, "removed class from cart")
-                            viewmodel.cartRepository.deleteClassFromCart(section)
-                        }
+                        // remove class from shopping cart if user unchecks checkbox
+                        viewmodel.deleteClassFromCart(section)
                     }
                 }
             }

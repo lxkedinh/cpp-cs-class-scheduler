@@ -21,7 +21,7 @@ class ShoppingCartRepository private constructor(context: Context) {
 
     fun getCart(): Flow<List<CsClass>> = cartDao.getCart()
 
-    suspend fun queryClassInCart(courseId: Int, section: Int) = cartDao.queryClassInCart(courseId, section)
+    suspend fun queryClassInCart(courseId: Int, section: Int): CsClass? = cartDao.queryClassInCart(courseId, section)
 
     suspend fun addClassToCart(item: CsClass) = cartDao.addClassToCart(item)
 

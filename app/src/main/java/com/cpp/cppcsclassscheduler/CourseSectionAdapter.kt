@@ -7,21 +7,8 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class CourseSectionAdapter(val sections: List<CsClass>, val inflatableViewResource: Int) :
-    RecyclerView.Adapter<CourseSectionHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseSectionHolder {
-        val view = LayoutInflater.from(parent.context).inflate(inflatableViewResource, parent, false)
-        return CourseSectionHolder(view)
-    }
-
-    override fun getItemCount() = sections.size
-
-    override fun onBindViewHolder(holder: CourseSectionHolder, position: Int) {
-        holder.bind(sections[position])
-    }
-}
-
+// base course section holder class that is open so I can extend it with listeners
+// for future view holders like the shopping cart recyclerview
 open class CourseSectionHolder(view: View): RecyclerView.ViewHolder(view) {
 
     val sectionNumberView: TextView = itemView.findViewById(R.id.course_section_number)

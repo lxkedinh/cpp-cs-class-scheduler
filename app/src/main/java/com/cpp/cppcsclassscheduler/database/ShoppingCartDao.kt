@@ -14,7 +14,7 @@ interface ShoppingCartDao {
     fun getCart(): Flow<List<CsClass>>
 
     @Query("SELECT * FROM csClasses WHERE courseId = :courseId AND section = :section")
-    suspend fun queryClassInCart(courseId: Int, section: Int): CsClass
+    suspend fun queryClassInCart(courseId: Int, section: Int): CsClass?
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addClassToCart(item: CsClass)
