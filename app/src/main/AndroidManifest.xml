@@ -37,7 +37,7 @@
         <activity
             android:name=".ClassSectionResultsActivity" />
         <activity
-            android:name=".ShoppingCartView" />
+            android:name=".ShoppingCartActivity" />
     </application>
 
 </manifest>

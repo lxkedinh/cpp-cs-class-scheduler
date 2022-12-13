@@ -8,4 +8,7 @@
     <string name="course_instructor">Instructor: %1$s</string>
     <string name="course_room">Location: Building %1$s Room %2$s</string>
     <string name="course_days">Meeting Dates: %1$s %2$s - %3$s</string>
+    <string name="shopping_cart_text">Shopping Cart</string>
+    <string name="add_to_calendar_button_text">Add</string>
+    <string name="shopping_cart_button_text">Cart</string>
 </resources>

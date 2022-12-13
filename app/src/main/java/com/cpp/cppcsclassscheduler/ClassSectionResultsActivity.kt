@@ -1,11 +1,13 @@
 package com.cpp.cppcsclassscheduler
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Button
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,77 +20,62 @@ private const val TAG = "ClassSectionResultsActivity"
 
 class ClassSectionResultsActivity : AppCompatActivity() {
 
+    private val viewmodel: ClassSectionResultsViewModel by lazy {
+        ViewModelProvider(this)[ClassSectionResultsViewModel::class.java]
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.class_section_list)
+        setContentView(R.layout.course_section_list)
         val courseId = intent.getIntExtra(EXTRA_COURSE_ID, 0)
         val courseName = intent.getStringExtra(EXTRA_COURSE_NAME)
 
         val screenHeading = findViewById<TextView>(R.id.course_name)
         screenHeading.text = courseName
 
-        val viewmodel: ClassSectionResultsViewModel by lazy {
-            ViewModelProvider(this)[ClassSectionResultsViewModel::class.java]
-        }
-
         viewmodel.viewModelScope.launch(Dispatchers.IO) {
 
             // fetch course sections on a separate IO thread
-            val sections = viewmodel.repository.getAllSections(courseId)
+            val sections = viewmodel.csClassRepository.getAllSections(courseId)
 
             // populate recycler view with fetched sections back on main thread
             withContext(Dispatchers.Main) {
                 val recyclerView: RecyclerView = findViewById(R.id.course_sections_recyclerview)
-                recyclerView.adapter = CourseSectionAdapter(sections)
+                recyclerView.adapter = CourseSectionAdapter(sections, R.layout.course_section_selection_list_item)
                 recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
             }
         }
-    }
 
-    private inner class CourseSectionHolder(view: View): RecyclerView.ViewHolder(view) {
-
-        val sectionNumberView: TextView = itemView.findViewById(R.id.course_section_number)
-        val instructorView: TextView = itemView.findViewById(R.id.course_instructor)
-        val roomView: TextView = itemView.findViewById(R.id.course_room)
-        val daysView: TextView = itemView.findViewById(R.id.course_days)
-
-        fun bind(section: CsClass) {
-            sectionNumberView.text = getString(R.string.course_section_number, section.section)
-            instructorView.text = getString(R.string.course_instructor, section.instructor)
-
-            // check for TBA on section room or meeting days and times
-            val roomText: String = if (section.room == "TBA") {
-                "TBA"
-            } else {
-                val (building, room) = section.room.split(".")
-                getString(R.string.course_room, building, room)
-            }
-            roomView.text = roomText
-
-            val daysText: String =
-                if (section.days == "TBA" ||
-                    section.startTime == "TBA" ||
-                    section.endTime == "TBA") {
-                "TBA"
-            } else {
-                    getString(R.string.course_days, section.days, section.startTime, section.endTime)
-            }
-            daysView.text = daysText
+        val shoppingCartButton: Button = findViewById(R.id.shopping_cart_button)
+        shoppingCartButton.setOnClickListener {
+            startActivity(Intent(this, ShoppingCartActivity::class.java))
         }
     }
 
-    private inner class CourseSectionAdapter(var sections: List<CsClass>)
-        : RecyclerView.Adapter<CourseSectionHolder>() {
+    private inner class sectionSelectionItemHolder(view: View): CourseSectionHolder(view) {
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseSectionHolder {
-            val view = layoutInflater.inflate(R.layout.course_section_item, parent, false)
-            return CourseSectionHolder(view)
-        }
+        val checkBox: CheckBox = itemView.findViewById(R.id.check_box)
 
-        override fun getItemCount() = sections.size
+        override fun bind(section: CsClass) {
+            super.bind(section)
 
-        override fun onBindViewHolder(holder: CourseSectionHolder, position: Int) {
-            holder.bind(sections[position])
+            checkBox.setOnClickListener { view ->
+                if (view is CheckBox) {
+                    if (view.isChecked) {
+                        // add class to shopping cart
+                        viewmodel.viewModelScope.launch(Dispatchers.IO) {
+                            Log.d(TAG, "added class to cart")
+                            viewmodel.cartRepository.addClassToCart(section)
+                        }
+                    } else {
+                        // remove class from shopping cart
+                        viewmodel.viewModelScope.launch(Dispatchers.IO) {
+                            Log.d(TAG, "removed class from cart")
+                            viewmodel.cartRepository.deleteClassFromCart(section)
+                        }
+                    }
+                }
+            }
         }
     }
 }
