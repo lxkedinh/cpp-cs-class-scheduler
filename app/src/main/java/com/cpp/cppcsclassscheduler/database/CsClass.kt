@@ -1,4 +1,4 @@
-package com.cpp.cppcsclassscheduler
+package com.cpp.cppcsclassscheduler.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

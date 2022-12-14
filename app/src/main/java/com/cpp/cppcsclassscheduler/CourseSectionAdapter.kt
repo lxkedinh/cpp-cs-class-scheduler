@@ -1,11 +1,9 @@
 package com.cpp.cppcsclassscheduler
 
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.cpp.cppcsclassscheduler.database.CsClass
 
 // base course section holder class that is open so I can extend it with listeners
 // for future view holders like the shopping cart recyclerview

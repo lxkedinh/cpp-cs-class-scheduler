@@ -1,10 +1,8 @@
-package com.cpp.cppcsclassscheduler
+package com.cpp.cppcsclassscheduler.activities.course_selection
 
-import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -13,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cpp.cppcsclassscheduler.R
+import com.cpp.cppcsclassscheduler.activities.section_selection.SectionSelectionActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -21,14 +21,14 @@ private const val TAG = "CourseSearchActivity"
 const val EXTRA_COURSE_ID = "com.cpp.cppcsclassscheduler.EXTRA_COURSE_ID"
 const val EXTRA_COURSE_NAME = "com.cpp.cppcssclassscheduler.EXTRA_COURSE_NAME"
 
-class CourseSearchActivity : AppCompatActivity() {
+class CourseSelectionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.course_search_results)
 
-        val viewmodel: CourseSearchViewModel by lazy {
-            ViewModelProvider(this)[CourseSearchViewModel::class.java]
+        val viewmodel: CourseSelectionViewModel by lazy {
+            ViewModelProvider(this)[CourseSelectionViewModel::class.java]
         }
 
         // fetch all CPP cs classes on different thread in coroutine
@@ -40,12 +40,6 @@ class CourseSearchActivity : AppCompatActivity() {
                 val recyclerView: RecyclerView = findViewById(R.id.search_results_recyclerview)
                 recyclerView.adapter = CourseAdapter(courseNames)
                 recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
-            }
-        }
-
-        // TODO: verify the action and get search query
-        if (Intent.ACTION_SEARCH == intent.action) {
-            intent.getStringExtra(SearchManager.QUERY)?.also { query ->
             }
         }
     }
@@ -88,7 +82,7 @@ class CourseSearchActivity : AppCompatActivity() {
 
     companion object {
         fun courseSectionsIntent(packageContext: Context, courseId: Int, courseName: String): Intent {
-            return Intent(packageContext, ClassSectionResultsActivity::class.java).apply {
+            return Intent(packageContext, SectionSelectionActivity::class.java).apply {
                 putExtra(EXTRA_COURSE_ID, courseId)
                 putExtra(EXTRA_COURSE_NAME, courseName)
             }

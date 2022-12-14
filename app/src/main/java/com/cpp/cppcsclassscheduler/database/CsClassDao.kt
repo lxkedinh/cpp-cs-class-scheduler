@@ -3,8 +3,6 @@ package com.cpp.cppcsclassscheduler.database
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.cpp.cppcsclassscheduler.CsClass
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CsClassDao {

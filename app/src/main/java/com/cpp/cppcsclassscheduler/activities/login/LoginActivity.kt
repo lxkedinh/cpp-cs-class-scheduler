@@ -1,10 +1,12 @@
-package com.cpp.cppcsclassscheduler
+package com.cpp.cppcsclassscheduler.activities.login
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.cpp.cppcsclassscheduler.R
+import com.cpp.cppcsclassscheduler.activities.course_selection.CourseSelectionActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -15,7 +17,7 @@ import com.google.android.gms.tasks.Task
 private const val TAG = "MainActivity"
 private const val RC_SIGN_IN = 123
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -31,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         val account = GoogleSignIn.getLastSignedInAccount(this)
         if(account != null){
-            val intent = Intent(this, CourseSearchActivity::class.java)
+            val intent = Intent(this, CourseSelectionActivity::class.java)
             startActivity(intent)
         }
 
@@ -65,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             val account = completedTask.getResult(ApiException::class.java)
 
             // Signed in successfully, show authenticated UI.
-            val intent = Intent(this, CourseSearchActivity::class.java)
+            val intent = Intent(this, CourseSelectionActivity::class.java)
             startActivity(intent)
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.

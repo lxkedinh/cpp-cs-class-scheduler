@@ -8,7 +8,7 @@
     android:layout_marginBottom="10dp">
 
     <include
-        android:id="@+id/include"
+        android:id="@+id/course_section_list_item"
         layout="@layout/course_section_list_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/check_box"
@@ -23,7 +23,7 @@
         android:layout_marginEnd="7dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/include"
+        app:layout_constraintStart_toEndOf="@+id/course_section_list_item"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

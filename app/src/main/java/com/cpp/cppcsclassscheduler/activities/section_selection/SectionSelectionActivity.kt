@@ -1,4 +1,4 @@
-package com.cpp.cppcsclassscheduler
+package com.cpp.cppcsclassscheduler.activities.section_selection
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,16 +12,22 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cpp.cppcsclassscheduler.CourseSectionHolder
+import com.cpp.cppcsclassscheduler.R
+import com.cpp.cppcsclassscheduler.activities.course_selection.EXTRA_COURSE_ID
+import com.cpp.cppcsclassscheduler.activities.course_selection.EXTRA_COURSE_NAME
+import com.cpp.cppcsclassscheduler.activities.shopping_cart.ShoppingCartActivity
+import com.cpp.cppcsclassscheduler.database.CsClass
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 private const val TAG = "ClassSectionResultsActivity"
 
-class ClassSectionResultsActivity : AppCompatActivity() {
+class SectionSelectionActivity : AppCompatActivity() {
 
-    private val viewmodel: ClassSectionResultsViewModel by lazy {
-        ViewModelProvider(this)[ClassSectionResultsViewModel::class.java]
+    private val viewmodel: SectionSelectionViewModel by lazy {
+        ViewModelProvider(this)[SectionSelectionViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

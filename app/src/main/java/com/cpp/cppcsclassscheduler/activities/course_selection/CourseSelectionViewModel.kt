@@ -1,8 +1,9 @@
-package com.cpp.cppcsclassscheduler
+package com.cpp.cppcsclassscheduler.activities.course_selection
 
 import androidx.lifecycle.*
+import com.cpp.cppcsclassscheduler.database.CsClassRepository
 
-class CourseSearchViewModel : ViewModel() {
+class CourseSelectionViewModel : ViewModel() {
 
     private val csClassRepository = CsClassRepository.get()
 
