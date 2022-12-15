@@ -1,14 +1,9 @@
-package com.cpp.cppcsclassscheduler
+package com.cpp.cppcsclassscheduler.database
 
 import android.content.Context
 import androidx.room.Room
+import com.cpp.cppcsclassscheduler.database.CsClass
 import com.cpp.cppcsclassscheduler.database.CsClassDatabase
-import com.google.gson.Gson
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
-import java.util.concurrent.Executors
 
 private const val DATABASE_NAME = "cpp-cs-classes.db"
 
