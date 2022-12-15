@@ -7,6 +7,7 @@ import com.cpp.cppcsclassscheduler.calendar_api.CalendarClient
 import com.cpp.cppcsclassscheduler.database.CsClass
 import com.cpp.cppcsclassscheduler.database.ShoppingCartRepository
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport
+import com.google.api.services.calendar.Calendar.Events
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -17,11 +18,13 @@ private const val TAG = "ShoppingCartViewModel"
 class ShoppingCartViewModel: ViewModel() {
 
     private val cartRepository = ShoppingCartRepository.get()
+    private val calendarClient = CalendarClient.get()
 
     fun getShoppingCart(): Flow<List<CsClass>> = cartRepository.getCart()
 
-    fun addCartToCalendar(clientSecretsJSONReader: BufferedReader) {
+    fun addCartToCalendar() {
         viewModelScope.launch(Dispatchers.IO) {
+            // TODO: Convert
         }
     }
 
@@ -29,5 +32,9 @@ class ShoppingCartViewModel: ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             cartRepository.deleteClassFromCart(section)
         }
+    }
+
+    fun convertClassesToEvents(classes: List<CsClass>): Events {
+        TODO("Not implemented yet")
     }
 }
