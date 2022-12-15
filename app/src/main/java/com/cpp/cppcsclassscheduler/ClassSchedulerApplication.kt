@@ -12,3 +12,5 @@ class ClassSchedulerApplication : Application() {
         ShoppingCartRepository.initialize(this)
     }
 }
+
+
