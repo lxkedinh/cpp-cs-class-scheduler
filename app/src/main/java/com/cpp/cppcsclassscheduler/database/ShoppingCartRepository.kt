@@ -37,7 +37,7 @@ class ShoppingCartRepository private constructor(context: Context) {
 
         fun get(): ShoppingCartRepository {
             return INSTANCE ?:
-            throw IllegalStateException("Cs Class Repository must be initialized")
+            throw IllegalStateException("Shopping Cart Repository must be initialized")
         }
     }
 }

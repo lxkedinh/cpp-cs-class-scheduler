@@ -7,11 +7,15 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.cpp.cppcsclassscheduler.R
 import com.cpp.cppcsclassscheduler.activities.course_selection.CourseSelectionActivity
+import com.cpp.cppcsclassscheduler.calendar_api.CalendarClient
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.Scope
 import com.google.android.gms.tasks.Task
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
+import com.google.api.services.calendar.CalendarScopes
 
 
 private const val TAG = "MainActivity"
@@ -25,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestScopes(Scope(CalendarScopes.CALENDAR_EVENTS))
             .requestEmail()
             .build()
 
@@ -33,6 +38,11 @@ class LoginActivity : AppCompatActivity() {
 
         val account = GoogleSignIn.getLastSignedInAccount(this)
         if(account != null){
+            // initialize Google Calendar client with account credentials
+            val credential = GoogleAccountCredential.usingOAuth2(this, CalendarClient.CALENDAR_SCOPES)
+            credential.selectedAccount = account.account
+            CalendarClient.initialize(applicationContext, credential)
+
             val intent = Intent(this, CourseSelectionActivity::class.java)
             startActivity(intent)
         }
@@ -42,12 +52,6 @@ class LoginActivity : AppCompatActivity() {
             val signInIntent: Intent = mGoogleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
-
-//        val skipButton = findViewById<Button>(R.id.button2)
-//        skipButton.setOnClickListener {
-//            val intent = Intent(this, CourseSearchActivity::class.java)
-//            startActivity(intent)
-//        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -65,6 +69,11 @@ class LoginActivity : AppCompatActivity() {
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
+
+            // initialize Google Calendar client with account credentials
+            val credential = GoogleAccountCredential.usingOAuth2(this, CalendarClient.CALENDAR_SCOPES)
+            credential.selectedAccount = account.account
+            CalendarClient.initialize(applicationContext, credential)
 
             // Signed in successfully, show authenticated UI.
             val intent = Intent(this, CourseSelectionActivity::class.java)
