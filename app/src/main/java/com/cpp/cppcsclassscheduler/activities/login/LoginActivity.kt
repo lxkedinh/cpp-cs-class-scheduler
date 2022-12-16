@@ -20,6 +20,9 @@ private const val RC_SIGN_IN = 123
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
+        window.statusBarColor = getColor(R.color.blue)
+        window.navigationBarColor = getColor(R.color.light_blue)
         setContentView(R.layout.activity_main)
 
         // Configure sign-in to request the user's ID, email address, and basic
