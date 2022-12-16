@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -25,6 +26,9 @@ class CourseSelectionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
+        window.statusBarColor = getColor(R.color.blue)
+        window.navigationBarColor = getColor(R.color.light_blue)
         setContentView(R.layout.course_search_results)
 
         val viewmodel: CourseSelectionViewModel by lazy {
