@@ -80,6 +80,7 @@ class SectionSelectionActivity : AppCompatActivity() {
             super.bind(section)
 
             viewmodel.viewModelScope.launch {
+                // update current checkbox status if class is already in cart
                 val isClassInCart = withContext(Dispatchers.IO) {
                     viewmodel.queryClassInCart(section.courseId, section.section)
                 }

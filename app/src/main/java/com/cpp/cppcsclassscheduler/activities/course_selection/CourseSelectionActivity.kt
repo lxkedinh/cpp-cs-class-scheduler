@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cpp.cppcsclassscheduler.R
 import com.cpp.cppcsclassscheduler.activities.section_selection.SectionSelectionActivity
-import com.cpp.cppcsclassscheduler.calendar_api.CalendarClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

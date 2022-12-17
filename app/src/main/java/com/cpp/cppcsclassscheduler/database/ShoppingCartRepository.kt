@@ -2,10 +2,7 @@ package com.cpp.cppcsclassscheduler.database
 
 import android.content.Context
 import androidx.room.Room
-import com.cpp.cppcsclassscheduler.database.CsClass
-import com.cpp.cppcsclassscheduler.database.ShoppingCartDatabase
 import kotlinx.coroutines.flow.Flow
-
 
 private const val DATABASE_NAME = "class-shopping-cart.db"
 

@@ -2,7 +2,6 @@ package com.cpp.cppcsclassscheduler.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Fts4
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "csClasses")
@@ -21,13 +20,3 @@ data class CsClass(
     @ColumnInfo(name = "rowid")
     val rowId: Int? = null
 )
-
-//// virtual table to support full-text search
-//@Entity(tableName = "csClasses_fts")
-//@Fts4(contentEntity = CsClass::class)
-//data class CsClassesFTS(
-//    @ColumnInfo(name = "id")
-//    val id: Int,
-//    @ColumnInfo(name = "name")
-//    val name: String
-//)
