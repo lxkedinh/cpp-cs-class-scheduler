@@ -80,7 +80,6 @@ class ShoppingCartViewModel: ViewModel() {
             val startDateString = startingDaysMap[firstDay]
 
             val startTimeString = "${convertTo24HourFormat(csClass.startTime)}:00$TIMEZONE_OFFSET"
-            Log.d(TAG, "${startDateString}T$startTimeString")
             val startDateTime = DateTime("${startDateString}T$startTimeString")
 
             val start = EventDateTime()
@@ -91,7 +90,6 @@ class ShoppingCartViewModel: ViewModel() {
             // create date time string for end time
             val (endHours, endMinutes) = convertTo24HourFormat(csClass.endTime).split(":")
             val endTimeString = "$endHours:$endMinutes:00-08:00"
-            Log.d(TAG, "${startDateString}T$endTimeString")
             val endDateTime = DateTime("${startDateString}T$endTimeString")
 
             val end = EventDateTime()
