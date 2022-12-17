@@ -1,17 +1,17 @@
 package com.cpp.cppcsclassscheduler.activities.shopping_cart
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cpp.cppcsclassscheduler.calendar_api.CalendarClient
 import com.cpp.cppcsclassscheduler.database.CsClass
 import com.cpp.cppcsclassscheduler.database.ShoppingCartRepository
-import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport
-import com.google.api.services.calendar.Calendar.Events
+import com.google.api.client.util.DateTime
+import com.google.api.services.calendar.model.Event
+import com.google.api.services.calendar.model.EventDateTime
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import java.io.BufferedReader
+
 
 private const val TAG = "ShoppingCartViewModel"
 
@@ -34,7 +34,30 @@ class ShoppingCartViewModel: ViewModel() {
         }
     }
 
-    fun convertClassesToEvents(classes: List<CsClass>): Events {
-        TODO("Not implemented yet")
+    fun convertClassesToEvents(cart: List<CsClass>): List<Event> {
+
+        return cart.map { csClass ->
+
+            val event = Event()
+                .setSummary("CS ${csClass.courseId} - ${csClass.name}")
+                .setLocation("${csClass.room}")
+                .setDescription("Section ${csClass.section} with ${csClass.instructor}")
+            event
+
+            val startDateTime = DateTime(csClass.startTime)
+
+            val start = EventDateTime()
+                .setDateTime(startDateTime)
+                .setTimeZone("America/Los_Angeles")
+            event.setStart(start)
+
+            val endDateTime = DateTime(csClass.endTime)
+
+            val end = EventDateTime()
+                .setDateTime(endDateTime)
+                .setTimeZone("America/Los_Angeles")
+            event.setEnd(end)
+        }
     }
+
 }
