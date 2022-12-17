@@ -39,7 +39,6 @@
         android:layout_marginTop="690dp"
         android:layout_marginEnd="-400dp"
         android:background="@drawable/round_button"
-        android:text="@string/add_dialog_button_text"
         android:backgroundTint="#FFFFFF"
         android:foreground="@drawable/ic_add"
         android:foregroundGravity="center"
