@@ -16,8 +16,8 @@ class ShoppingCartViewModel: ViewModel() {
 
     fun addCartToCalendar() {
         viewModelScope.launch(Dispatchers.IO) {
-            TODO("add Google Calendar API code to add classes as events to user's google calendar here")
-        }
+            getShoppingCart().collect { cart ->
+                convertClassesToEvents(cart)        }
     }
 
     fun deleteCourseFromCart(section: CsClass) {
