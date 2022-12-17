@@ -14,15 +14,17 @@ class ShoppingCartViewModel: ViewModel() {
 
     fun getShoppingCart(): Flow<List<CsClass>> = cartRepository.getCart()
 
-    fun addCartToCalendar() {
+    private fun addCartToCalendar(cart: List<CsClass>) {
         viewModelScope.launch(Dispatchers.IO) {
             getShoppingCart().collect { cart ->
-                convertClassesToEvents(cart)        }
-    }
+                addCartToCalendar(cart)
+            }
+        }
 
-    fun deleteCourseFromCart(section: CsClass) {
-        viewModelScope.launch(Dispatchers.IO) {
-            cartRepository.deleteClassFromCart(section)
+        fun deleteCourseFromCart(section: CsClass) {
+            viewModelScope.launch(Dispatchers.IO) {
+                cartRepository.deleteClassFromCart(section)
+            }
         }
     }
 }
