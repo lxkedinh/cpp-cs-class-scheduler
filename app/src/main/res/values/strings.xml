@@ -18,4 +18,5 @@
     <string name="shopping_cart_delete_confirmation_dialog">Are you sure you want to delete %1s from your cart?</string>
     <string name="shopping_cart_add_classes_dialog_text">Add classes to your primary Google Calendar?</string>
     <string name="open_google_calendar_dialog_text">Classes were successfully added! Do you want to open Google Calendar?</string>
+    <string name="course_selection_title">Choose a CS Course</string>
 </resources>

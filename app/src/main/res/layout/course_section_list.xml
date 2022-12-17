@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/blue">
 
     <TextView
         android:id="@+id/course_name"
@@ -13,7 +14,10 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:gravity="center"
-        android:textSize="24sp"
+        android:fontFamily="@font/open_sans_bold"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,13 +36,17 @@
         android:id="@+id/shopping_cart_button"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_marginTop="650dp"
-        android:layout_marginEnd="-400dp"
+        android:layout_marginTop="690dp"
+        android:layout_marginEnd="-380dp"
         android:background="@drawable/round_button"
-        android:text="@string/shopping_cart_button_text"
+        android:foreground="@drawable/ic_shopping_cart"
+        android:foregroundGravity="center"
+        android:foregroundTint="@color/light_blue"
         android:textAlignment="center"
+        android:textColor="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.452"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

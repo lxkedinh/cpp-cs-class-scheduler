@@ -32,6 +32,9 @@ class SectionSelectionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
+        window.statusBarColor = getColor(R.color.blue)
+        window.navigationBarColor = getColor(R.color.light_blue)
         setContentView(R.layout.course_section_list)
         val courseId = intent.getIntExtra(EXTRA_COURSE_ID, 0)
         val courseName = intent.getStringExtra(EXTRA_COURSE_NAME)

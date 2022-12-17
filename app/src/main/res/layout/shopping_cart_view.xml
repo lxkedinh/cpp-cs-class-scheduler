@@ -3,15 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/blue">
 
     <TextView
         android:id="@+id/shopping_cart_text"
         android:layout_width="wrap_content"
-        android:layout_height="32dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="200dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="200dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:textColor="@color/white"
         android:layout_marginBottom="25dp"
         android:text="@string/shopping_cart_text"
         android:textSize="24sp"
@@ -33,10 +36,16 @@
         android:id="@+id/add_to_calendar_button"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_marginTop="650dp"
+        android:layout_marginTop="690dp"
         android:layout_marginEnd="-400dp"
         android:background="@drawable/round_button"
         android:text="@string/add_dialog_button_text"
+        android:backgroundTint="#FFFFFF"
+        android:foreground="@drawable/ic_add"
+        android:foregroundGravity="center"
+        android:foregroundTint="@color/light_blue"
+        android:textColor="@color/blue"
         app:layout_constraintEnd_toStartOf="@+id/shopping_cart_recyclerview"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

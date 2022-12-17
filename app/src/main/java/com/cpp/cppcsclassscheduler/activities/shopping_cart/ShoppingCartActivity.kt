@@ -27,6 +27,9 @@ class ShoppingCartActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
+        window.statusBarColor = getColor(R.color.blue)
+        window.navigationBarColor = getColor(R.color.light_blue)
         setContentView(R.layout.shopping_cart_view)
 
         viewmodel.viewModelScope.launch(Dispatchers.IO) {
