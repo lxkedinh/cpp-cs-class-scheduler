@@ -1,7 +1,6 @@
 package com.cpp.cppcsclassscheduler.activities.shopping_cart
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cpp.cppcsclassscheduler.calendar_api.CalendarClient
