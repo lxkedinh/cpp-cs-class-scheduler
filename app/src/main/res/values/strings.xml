@@ -9,12 +9,14 @@
     <string name="course_room">Location: Building %1$s Room %2$s</string>
     <string name="course_days">Meeting Dates: %1$s %2$s - %3$s</string>
     <string name="shopping_cart_text">Shopping Cart</string>
-    <string name="add_to_calendar_button_text">Add</string>
     <string name="shopping_cart_button_text">Cart</string>
-    <string name="shopping_cart_delete_dialog_button_text">Delete</string>
-    <string name="shopping_cart_cancel_dialog_button_text">Cancel</string>
-    <string name="shopping_cart_add_dialog_button_text">Add</string>
+    <string name="delete_dialog_button_text">Delete</string>
+    <string name="cancel_dialog_button_text">Cancel</string>
+    <string name="add_dialog_button_text">Add</string>
+    <string name="dismiss_dialog_button_text">Dismiss</string>
+    <string name="open_dialog_button_text">Open</string>
     <string name="shopping_cart_delete_confirmation_dialog">Are you sure you want to delete %1s from your cart?</string>
     <string name="shopping_cart_add_classes_dialog_text">Add classes to your primary Google Calendar?</string>
+    <string name="open_google_calendar_dialog_text">Classes were successfully added! Do you want to open Google Calendar?</string>
     <string name="course_selection_title">Choose a CS Course</string>
 </resources>

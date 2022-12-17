@@ -34,7 +34,7 @@ class ShoppingCartActivity : AppCompatActivity() {
 
         viewmodel.viewModelScope.launch(Dispatchers.IO) {
             // fetch shopping cart
-            viewmodel.getShoppingCart().collect() {
+            viewmodel.getShoppingCart().collect {
                 withContext(Dispatchers.Main) {
                     // populate recycler view in UI thread
                     val recyclerview: RecyclerView = findViewById(R.id.shopping_cart_recyclerview)
@@ -46,6 +46,7 @@ class ShoppingCartActivity : AppCompatActivity() {
 
         val addClassesButton: Button = findViewById(R.id.add_to_calendar_button)
         addClassesButton.setOnClickListener {
+            // show add confirmation alert dialog
             AddClassDialogFragment().show(supportFragmentManager, ADD_CLASSES_DIALOG_TAG)
         }
     }
@@ -72,6 +73,7 @@ class ShoppingCartActivity : AppCompatActivity() {
         override fun bind(section: CsClass) {
             super.bind(section)
 
+            // show delete confirmation alert dialog
             deleteButton.setOnClickListener { DeleteSectionDialogFragment(section).show(supportFragmentManager, CART_DELETE_DIALOG_TAG) }
         }
     }

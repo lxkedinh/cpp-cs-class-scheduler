@@ -9,10 +9,10 @@ import com.cpp.cppcsclassscheduler.database.CsClass
 // for future view holders like the shopping cart recyclerview
 open class CourseSectionHolder(view: View): RecyclerView.ViewHolder(view) {
 
-    val sectionNumberView: TextView = itemView.findViewById(R.id.course_section_number)
-    val instructorView: TextView = itemView.findViewById(R.id.course_instructor)
-    val roomView: TextView = itemView.findViewById(R.id.course_room)
-    val daysView: TextView = itemView.findViewById(R.id.course_days)
+    private val sectionNumberView: TextView = itemView.findViewById(R.id.course_section_number)
+    private val instructorView: TextView = itemView.findViewById(R.id.course_instructor)
+    private val roomView: TextView = itemView.findViewById(R.id.course_room)
+    private val daysView: TextView = itemView.findViewById(R.id.course_days)
 
     open fun bind(section: CsClass) {
         sectionNumberView.text = itemView.context.getString(R.string.course_section_number, section.section)
