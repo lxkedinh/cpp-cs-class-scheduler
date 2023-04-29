@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "name": "Broncodirect Class Scraper",
+  "version": "1.0",
+  "description": "Scrapes classes from BroncoDirect class search as a JSON encoded array",
+  "content_scripts": [
+    {
+      "matches": ["https://cmsweb.cms.cpp.edu/*"],
+      "js": ["./index.js"],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ]
+}
