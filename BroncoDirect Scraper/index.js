@@ -81,24 +81,6 @@ function scrapeClasses() {
     });
   });
 
-  // let db, objectStore;
-  // const request = window.indexedDB.open("broncodirect-scraper", 1);
-
-  // request.onerror = (event) => {
-  //   console.error(event);
-  // };
-  // request.onsuccess = (event) => {
-  //   db = event.target.result;
-  // };
-  // request.onupgradeneeded = (event) => {
-  //   db = event.target.result;
-  //   objectStore = db.createObjectStore("scraped-data", { keyPath: "broncos" });
-  // };
-
-  // db.onsuccess = (event) => console.log("Database initialized");
-  // const transaction = db.transaction("broncodirect", "readwrite");
-  // const data = JSON.stringify(classes);
-  // objectStore.put(data, "scraped_data");
   console.log(JSON.stringify(classes));
 }
 
